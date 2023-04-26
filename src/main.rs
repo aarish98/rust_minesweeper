@@ -1,5 +1,15 @@
 use std::io;
 
+type Position = (usize, usize);
+
+struct MineSweeper {
+    width: usize,
+    height: usize,
+    open_tiles: Vec<Position>,
+    mines: Vec<Position>,
+    flagged_tiles: Vec<Position>,
+}
+
 //get user cli input for file
 fn get_user_input () -> i32{
     println!("Hello! Give a number for a nxn grid.");
@@ -17,10 +27,12 @@ fn get_user_input () -> i32{
 
 fn main() {
 
-    let arr_size = get_user_input();
+    let grid_size = get_user_input();
     
-    if arr_size > 0 {
-        println!("Hello, world!: {}", arr_size);
+    if grid_size > 0 {
+        let mut grid  =  [[0u8; 4]; 6];
+
+        println!("Hello, world!: {}", grid_size);
     }
     else {
         println!("Invalid parameters provided")
