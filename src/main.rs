@@ -1,4 +1,5 @@
 use std::io;
+use rand::{thread_rng, Rng};
 
 type Position = (usize, usize);
 
@@ -11,16 +12,30 @@ struct MineSweeper {
 }
 
 impl MineSweeper {
-    pub fn new(width: usize, height: usize) -> MineSweeper {
+    pub fn new(width: usize, height: usize, mine_count: usize) -> MineSweeper {
         MineSweeper {
             width,
             height,
             open_cells: Vec::new(),
-            mines: Vec::new(),
-            flagged_cells: Vec::new()
+            mines: {
+                let mut mines:Vec<Position> = Vec::new();
+
+                while mines.len() < mine_count {
+                    mines.push((random_number(width), random_number(height)))
+                }
+
+                mines
+            },
+            flagged_cells: Vec::new(),
         }
     }
 }
+
+//creates a random number between 0 and max
+pub fn random_number(max: usize) -> usize {
+    let mut rng = thread_rng();
+    rng.gen_range(0..max)
+  }
 
 //get user cli input for file
 fn get_user_input () -> i32{
